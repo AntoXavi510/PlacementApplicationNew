@@ -53,14 +53,14 @@ namespace PlacementApplicationNew.Repository
             return (_context.Students?.Any(e => e.UserId == id)).GetValueOrDefault();
         }
 
-        public Student Login(Student student)
+        public async Task<Student> Login(Student student)
         {
-                var result = (from i in _context.Students where i.Password == student.Password && i.UserId == student.UserId select i).SingleOrDefault();
+                var result = await (from i in _context.Students where i.Password == student.Password && i.UserId == student.UserId select i).SingleOrDefaultAsync();
             try
             {
                 if (result != null)
                 {
-                    return student;
+                    return result;
                 }
                 else
                 {
@@ -70,7 +70,7 @@ namespace PlacementApplicationNew.Repository
             catch (Exception ex) {
                 throw;
             }
-            return student;
+            return null;
         }
         
 

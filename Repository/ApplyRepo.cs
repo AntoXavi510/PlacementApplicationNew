@@ -23,6 +23,10 @@ namespace PlacementApplicationNew.Repository
                     await _context.SaveChangesAsync();
                     return apply;
                 }
+                else
+                {
+                    return null;
+                }
             }
             catch(Exception ex)
             {

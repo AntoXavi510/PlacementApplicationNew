@@ -8,20 +8,20 @@ namespace PlacementApplicationNew.Model
         [Key]
         [Display(Name = "Role Id")]
         public int RoleId { get; set; }
-        [Required]
+       // [Required]
         [Display(Name = "Role")]
         public string? RoleName { get; set; }
-        [Required]
+        //[Required]
         [Display(Name = "Salary Package")]
         public long SalaryPackage { get; set; }
-        [Required]
+        //[Required]
 
         public string? Location { get; set; }
-        [Required]
+        //[Required]
         [Range(0, 10)]
         [Display(Name = "Required CGPA")]
         public int CutoffPercentage { get; set; }
-        [Required]
+        //[Required]
         [Display(Name = "Date Of Drive")]
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateOfDrive { get; set; }

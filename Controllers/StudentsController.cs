@@ -64,13 +64,14 @@ namespace PlacementApplicationNew.Controllers
             await placement.AddNewStudent(student);
             return CreatedAtAction("GetStudent", new { id = student.UserId }, student);
         }
-        [Route("[action]")]
-        [HttpPost]     
-        public ActionResult<Student> Login(Student student)
+        
+        [HttpPost("Login")]
+        public async Task<ActionResult<Student>> Login(Student student)
         {
-           var p= placement.Login(student);
-            // return CreatedAtAction("GetStudent", new { id = student.UserId }, student);
-            return p;
+          
+          if (await placement.Login(student) == null) 
+            { return BadRequest(); }
+            else { return Accepted(); }
         }
 
         // DELETE: api/Students/5

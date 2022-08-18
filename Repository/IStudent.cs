@@ -6,7 +6,7 @@ namespace PlacementApplicationNew.Repository
     {
         public Task<List<Student>> GetStudents();
         public Task<Student> GetStudent(int id);
-        public Student Login(Student student);
+        public Task<Student> Login(Student student);
         public Task<Student> AddNewStudent(Student student);
         public Task<Student> UpdateStudent(Student student);
  

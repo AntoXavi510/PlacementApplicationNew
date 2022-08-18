@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PlacementApplicationNew.Model;
+using PlacementApplicationNew.Repository;
 
 namespace PlacementApplicationNew.Controllers
 {
@@ -13,23 +14,15 @@ namespace PlacementApplicationNew.Controllers
     [ApiController]
     public class AdminsController : ControllerBase
     {
-        private readonly PlacementAppContext _context;
+        private readonly IAdmin placement;
 
-        public AdminsController(PlacementAppContext context)
+        public AdminsController(IAdmin _placement)
         {
-            _context = context;
+            placement = _placement;
         }
 
-        // GET: api/Admins
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Admin>>> GetAdmins()
-        {
-          if (_context.Admins == null)
-          {
-              return NotFound();
-          }
-            return await _context.Admins.ToListAsync();
-        }
+
+      
 
         // GET: api/Admins/5
         [HttpGet("{id}")]
@@ -78,6 +71,15 @@ namespace PlacementApplicationNew.Controllers
             }
 
             return NoContent();
+        }
+
+        [HttpPost("Login")]
+        public async Task<ActionResult<Admin>> Login(Admin admin)
+        {
+
+            if (await _context.Login(admin) == null)
+            { return BadRequest(); }
+            else { return Accepted(); }
         }
 
         // POST: api/Admins

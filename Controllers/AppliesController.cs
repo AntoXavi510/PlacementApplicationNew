@@ -104,11 +104,15 @@ namespace PlacementApplicationNew.Controllers
             //}
             //  _context.Applys.Add(apply);
             //  await _context.SaveChangesAsync();
-           // int? variable= HttpContext.Session.GetInt32("RoleId");
-           // apply.RoleId = variable;
-            await _context.Apply(apply);
+            // int? variable= HttpContext.Session.GetInt32("RoleId");
+            // apply.RoleId = variable;
+            if (await _context.Apply(apply) == null)
+            { return BadRequest(); }
+            
+            else { return Accepted(); }
+            //await _context.Apply(apply);
 
-            return CreatedAtAction("GetApply", new { id = apply.Id }, apply);
+            //return CreatedAtAction("GetApply", new { id = apply.Id }, apply);
         }
 
         // DELETE: api/Applies/5
