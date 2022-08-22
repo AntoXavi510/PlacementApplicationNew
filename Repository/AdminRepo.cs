@@ -12,8 +12,14 @@ namespace PlacementApplicationNew.Repository
         }
         public async Task<Admin> AddNewAdmin(Admin admin)
         {
-            _context.Admins.Add(admin);
-            await _context.SaveChangesAsync();
+            if (_context.Admins.Any(ac => ac.UserName.Equals(admin.UserName)))
+            {
+                return null;
+            }
+            else {
+                _context.Admins.Add(admin);
+                await _context.SaveChangesAsync();
+            }
             return admin;
         }
 
@@ -30,7 +36,7 @@ namespace PlacementApplicationNew.Repository
        
             public async Task<Admin> Login(Admin admin)
             {
-                var result = await (from i in _context.Admins where i.Password == admin.Password && i.UserId == admin.UserId select i).SingleOrDefaultAsync();
+                var result = await (from i in _context.Admins where i.Password == admin.Password && i.UserName == admin.UserName select i).SingleOrDefaultAsync();
                 try
                 {
                     if (result != null)

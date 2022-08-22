@@ -24,62 +24,63 @@ namespace PlacementApplicationNew.Controllers
 
       
 
-        // GET: api/Admins/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Admin>> GetAdmin(int id)
-        {
-          if (_context.Admins == null)
-          {
-              return NotFound();
-          }
-            var admin = await _context.Admins.FindAsync(id);
+        //// GET: api/Admins/5
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Admin>> GetAdmin(int id)
+        //{
+        //  if (_context.Admins == null)
+        //  {
+        //      return NotFound();
+        //  }
+        //    var admin = await _context.Admins.FindAsync(id);
 
-            if (admin == null)
-            {
-                return NotFound();
-            }
+        //    if (admin == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return admin;
-        }
+        //    return admin;
+        //}
 
-        // PUT: api/Admins/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutAdmin(int id, Admin admin)
-        {
-            if (id != admin.UserId)
-            {
-                return BadRequest();
-            }
+        //// PUT: api/Admins/5
+        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutAdmin(int id, Admin admin)
+        //{
+        //    if (id != admin.UserId)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            _context.Entry(admin).State = EntityState.Modified;
+        //    _context.Entry(admin).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AdminExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!AdminExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
         [HttpPost("Login")]
         public async Task<ActionResult<Admin>> Login(Admin admin)
         {
-
-            if (await _context.Login(admin) == null)
+            if (await placement.Login(admin) == null)
             { return BadRequest(); }
-            else { return Accepted(); }
+
+            else { return Accepted();
+            }
         }
 
         // POST: api/Admins
@@ -87,39 +88,34 @@ namespace PlacementApplicationNew.Controllers
         [HttpPost]
         public async Task<ActionResult<Admin>> PostAdmin(Admin admin)
         {
-          if (_context.Admins == null)
-          {
-              return Problem("Entity set 'PlacementAppContext.Admins'  is null.");
-          }
-            _context.Admins.Add(admin);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetAdmin", new { id = admin.UserId }, admin);
+            await placement.AddNewAdmin(admin);
+            return admin;
+           // return CreatedAtAction("GetStudent", new { id = admin.UserId }, admin);
         }
 
         // DELETE: api/Admins/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAdmin(int id)
-        {
-            if (_context.Admins == null)
-            {
-                return NotFound();
-            }
-            var admin = await _context.Admins.FindAsync(id);
-            if (admin == null)
-            {
-                return NotFound();
-            }
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeleteAdmin(int id)
+        //{
+        //    if (_context.Admins == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    var admin = await _context.Admins.FindAsync(id);
+        //    if (admin == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            _context.Admins.Remove(admin);
-            await _context.SaveChangesAsync();
+        //    _context.Admins.Remove(admin);
+        //    await _context.SaveChangesAsync();
 
-            return NoContent();
-        }
-        private bool AdminExists(int id)
-        {
-            return (_context.Admins?.Any(e => e.UserId == id)).GetValueOrDefault();
-        }
+        //    return NoContent();
+        //}
+        //private bool AdminExists(int id)
+        //{
+        //    return (_context.Admins?.Any(e => e.UserId == id)).GetValueOrDefault();
+        //}
 
     }
 }

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PlacementApplicationNew.Model;
 using PlacementApplicationNew.Repository;
-
 namespace PlacementApplicationNew.Controllers
 {
     [Route("api/[controller]")]
@@ -27,7 +26,6 @@ namespace PlacementApplicationNew.Controllers
         {
             return await placement.GetStudents();
         }
-
         // GET: api/Students/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Student>> GetStudent(int id)
@@ -60,11 +58,11 @@ namespace PlacementApplicationNew.Controllers
         [HttpPost]
         public async Task<ActionResult<Student>> PostStudent(Student student)
         {
-
-            await placement.AddNewStudent(student);
-            return CreatedAtAction("GetStudent", new { id = student.UserId }, student);
-        }
-        
+            if (await placement.AddNewStudent(student) == null)
+            { return BadRequest();
+            }
+            else { return Accepted(); }
+        }      
         [HttpPost("Login")]
         public async Task<ActionResult<Student>> Login(Student student)
         {

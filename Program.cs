@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+builder.Services.AddScoped<IAdmin, AdminRepo>();
 builder.Services.AddScoped<IApply, ApplyRepo>();
 builder.Services.AddScoped<IRoles, RoleRepo>();
 builder.Services.AddScoped<IStudent, StudentRepo>();

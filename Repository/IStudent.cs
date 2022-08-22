@@ -9,7 +9,8 @@ namespace PlacementApplicationNew.Repository
         public Task<Student> Login(Student student);
         public Task<Student> AddNewStudent(Student student);
         public Task<Student> UpdateStudent(Student student);
- 
+        public Task<Student> SearchForm();
+        public Task<List<Student>> SearchResult();
         public void DeleteStudent(int id);
         public bool StudentExists(int id);
        

@@ -43,7 +43,7 @@ namespace PlacementApplicationNew.Repository
         public async Task<List<Apply>> GetRolesForStudent(int id)
         {
             Student student = new Student();
-            List<Apply> result = await (from i in _context.Applys.Include(x => x.Student).Include(x => x.Role) where i.StudentId == id select i).ToListAsync();
+            List<Apply> result = await (from i in _context.Applys.Include(x => x.Student).Include(x => x.Role).ThenInclude(x=>x.Company) where i.StudentId == id select i).ToListAsync();
             return result;
         }
         public void DeleteApply(int id)
@@ -58,10 +58,14 @@ namespace PlacementApplicationNew.Repository
             var apply = await _context.Applys.Include(x => x.Student).Include(x => x.Role).Where(y => y.Id == id).FirstOrDefaultAsync();
             return apply;
         }
-
+        public async Task<List<Apply>> GetApplyForRoles(int id)
+        {
+            var apply = await _context.Applys.Include(x => x.Student).Include(x => x.Role).Where(y => y.RoleId == id).ToListAsync();
+            return apply;
+        }
         public async Task<List<Apply>> GetApplys()
         {
-            return await _context.Applys.Include(x => x.Student).Include(x => x.Role).ToListAsync();
+            return await _context.Applys.Include(x => x.Student).Include(x => x.Role).OrderBy(s => s.Role.RoleId).ToListAsync();
         }
 
      

@@ -42,7 +42,17 @@ namespace PlacementApplicationNew.Controllers
             //  return await _context.Applys.ToListAsync();
             return await _context.GetRolesForStudent(id);
         }
-
+        [Route("[action]")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Apply>>> GetApplyForRoles(int id)
+        {
+            //if (_context.Applys == null)
+            //{
+            //    return NotFound();
+            //}
+            //  return await _context.Applys.ToListAsync();
+            return await _context.GetApplyForRoles(id);
+        }
         // GET: api/Applies/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Apply>> GetApply(int id)

@@ -15,9 +15,16 @@ namespace PlacementApplicationNew.Repository
 
         public async Task<Student> AddNewStudent(Student student)
         {
-            _context.Students.Add(student);
-            await _context.SaveChangesAsync();
-            return student;
+            if (_context.Students.Any(ac => ac.UserId.Equals(student.UserId)))
+            {
+                return null;
+            }
+            else {
+                _context.Students.Add(student);
+                await _context.SaveChangesAsync();
+                return student;
+            }
+            
         }
 
         public void DeleteStudent(int id)
@@ -72,7 +79,17 @@ namespace PlacementApplicationNew.Repository
             }
             return null;
         }
-        
+
+        public Task<Student> SearchForm()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Student>> SearchResult()
+        {
+            throw new NotImplementedException();
+        }
+
 
         //public async Task<Student> Login(Student student)
         //{
