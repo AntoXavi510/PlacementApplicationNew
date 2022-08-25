@@ -31,7 +31,12 @@ namespace PlacementApplicationNew.Repository
         public async Task<List<Role>> GetRoles()
         {
           return  await _role.Roles.Include(x => x.Company).ToListAsync();
-        }     
+        }
+        public async Task<List<Role>> GetRolesForCompany(int id)
+        {
+            var apply = await _role.Roles.Include(x => x.Company).Where(y => y.CompanyID == id).ToListAsync();
+            return apply;
+        }
         public bool RoleExists(int id)
         {
             throw new NotImplementedException();

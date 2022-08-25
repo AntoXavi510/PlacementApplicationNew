@@ -30,18 +30,18 @@ namespace PlacementApplicationNew.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Student>> GetStudent(int id)
         {
-          //if (placement.GetStudent(id) == null)
-          //{
-          //    return NotFound();
-          //}
-          //  var student = await placement.GetStudent(id);
+            //if (placement.GetStudent(id) == null)
+            //{
+            //    return NotFound();
+            //}
+            //  var student = await placement.GetStudent(id);
 
-          //  if (student == null)
-          //  {
-          //      return NotFound();
-          //  }
+            //  if (student == null)
+            //  {
+            //      return NotFound();
+            //  }
 
-            return await placement.GetStudent(id); 
+            return await placement.GetStudent(id);
         }
 
         // PUT: api/Students/5
@@ -49,9 +49,9 @@ namespace PlacementApplicationNew.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutStudent(int id, Student student)
         {
-             await placement.UpdateStudent(student);
+            await placement.UpdateStudent(student);
             return NoContent();
-                  }
+        }
 
         // POST: api/Students
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -59,27 +59,33 @@ namespace PlacementApplicationNew.Controllers
         public async Task<ActionResult<Student>> PostStudent(Student student)
         {
             if (await placement.AddNewStudent(student) == null)
-            { return BadRequest();
+            {
+                return BadRequest();
             }
             else { return Accepted(); }
-        }      
+        }
         [HttpPost("Login")]
         public async Task<ActionResult<Student>> Login(Student student)
         {
-          
-          if (await placement.Login(student) == null) 
+
+            if (await placement.Login(student) == null)
             { return BadRequest(); }
-            else { return Accepted(); }
+            else { return await placement.Login(student); }
         }
 
         // DELETE: api/Students/5
         [HttpDelete("{id}")]
-        public ActionResult DeleteStudent(int id)
+        public async Task<IActionResult> DeleteStudent(int id)
         {
             placement.DeleteStudent(id);
-            return Ok(placement);
+            return NoContent();
         }
 
-      
+        //    [HttpGet("{id}")]
+        //    public async Task<IActionResult> GetStudent(int id)
+        //    {
+
+        //    }
+        //}
     }
 }

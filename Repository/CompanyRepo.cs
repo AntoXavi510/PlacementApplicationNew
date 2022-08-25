@@ -26,9 +26,16 @@ namespace PlacementApplicationNew.Repository
 
         public async Task<Company> AddNewCompany(Company company)
         {
-            _context.Companies.Add(company);
-            await _context.SaveChangesAsync();
-            return company;
+            if (_context.Companies.Any(ac => ac.CompanyName.Equals(company.CompanyName)))
+            {
+                return null;
+            }
+            else {
+                await _context.Companies.AddAsync(company);
+                await _context.SaveChangesAsync();
+                return company;
+            }
+            
         }
 
         public async  Task<Company> UpdateCompany(Company company)

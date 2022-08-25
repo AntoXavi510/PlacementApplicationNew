@@ -83,6 +83,11 @@ namespace PlacementApplicationNew.Controllers
             //  await _context.SaveChangesAsync();
 
             //  return CreatedAtAction("GetCompany", new { id = company.CompanyId }, company);
+            if (await placement.AddNewCompany(company) == null)
+            { return BadRequest(); }
+
+            else { return Accepted(); }
+
             await placement.AddNewCompany(company);
             return CreatedAtAction("GetCompany", new { id = company.CompanyId}, company);
         }

@@ -100,7 +100,17 @@ namespace PlacementApplicationNew.Controllers
             await _context.AddNewRole(role);
             return CreatedAtAction("GetRole", new { id = role.RoleId }, role);
         }
-
+        [Route("[action]")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Role>>> GetRolesForCompany(int id)
+        {
+            //if (_context.Applys == null)
+            //{
+            //    return NotFound();
+            //}
+            //  return await _context.Applys.ToListAsync();
+            return await _context.GetRolesForCompany(id);
+        }
         // DELETE: api/Roles/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRole(int id)

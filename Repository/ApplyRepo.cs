@@ -55,17 +55,17 @@ namespace PlacementApplicationNew.Repository
 
         public async Task<Apply> GetApply(int id)
         {
-            var apply = await _context.Applys.Include(x => x.Student).Include(x => x.Role).Where(y => y.Id == id).FirstOrDefaultAsync();
+            var apply = await _context.Applys.Include(x => x.Student).Include(x => x.Role).ThenInclude(x => x.Company).Where(y => y.Id == id).FirstOrDefaultAsync();
             return apply;
         }
         public async Task<List<Apply>> GetApplyForRoles(int id)
         {
-            var apply = await _context.Applys.Include(x => x.Student).Include(x => x.Role).Where(y => y.RoleId == id).ToListAsync();
+            var apply = await _context.Applys.Include(x => x.Student).Include(x => x.Role).ThenInclude(x => x.Company).Where(y => y.RoleId == id).ToListAsync();
             return apply;
         }
         public async Task<List<Apply>> GetApplys()
         {
-            return await _context.Applys.Include(x => x.Student).Include(x => x.Role).OrderBy(s => s.Role.RoleId).ToListAsync();
+            return await _context.Applys.Include(x => x.Student).Include(x => x.Role).ThenInclude(x => x.Company).OrderBy(s => s.Role.RoleId).ToListAsync();
         }
 
      

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
+
 namespace PlacementApplicationNew.Model
 {
     public class PlacementAppContext : DbContext
@@ -20,6 +21,7 @@ namespace PlacementApplicationNew.Model
                 optionsBuilder.UseSqlServer("Server=.;Database=PlacementApp;Trusted_Connection=True;");
             }
         }
+         
     }
     }
 

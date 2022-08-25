@@ -119,7 +119,7 @@ namespace PlacementApplicationNew.Controllers
             if (await _context.Apply(apply) == null)
             { return BadRequest(); }
             
-            else { return Accepted(); }
+            else { return await _context.Apply(apply); }
             //await _context.Apply(apply);
 
             //return CreatedAtAction("GetApply", new { id = apply.Id }, apply);
