@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PlacementApplicationNew.Model;
 using PlacementApplicationNew.Repository;
+using PlacementApplicationNew.Token;
+
 namespace PlacementApplicationNew.Controllers
 {
     [Route("api/[controller]")]
@@ -65,7 +67,7 @@ namespace PlacementApplicationNew.Controllers
             else { return Accepted(); }
         }
         [HttpPost("Login")]
-        public async Task<ActionResult<Student>> Login(Student student)
+        public async Task<ActionResult<StudentToken>> Login(Student student)
         {
 
             if (await placement.Login(student) == null)

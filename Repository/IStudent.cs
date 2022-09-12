@@ -1,4 +1,5 @@
 ﻿using PlacementApplicationNew.Model;
+using PlacementApplicationNew.Token;
 
 namespace PlacementApplicationNew.Repository
 {
@@ -6,7 +7,7 @@ namespace PlacementApplicationNew.Repository
     {
         public Task<List<Student>> GetStudents();
         public Task<Student> GetStudent(int id);
-        public Task<Student> Login(Student student);
+        public Task<StudentToken> Login(Student student);
         public Task<Student> AddNewStudent(Student student);
         public Task<Student> UpdateStudent(Student student);
         public void DeleteStudent(int id);
